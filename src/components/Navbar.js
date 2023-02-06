@@ -1,30 +1,33 @@
 import React from 'react';
-import { useNavigate } from 'react-router';
-
-const navigate = useNavigate();
+// import { useNavigate } from 'react-router';
+import { UserAuth } from '../context/AuthContext';
 
 const Navbar = () => {
+	const { googleSignIn } = UserAuth();
 
-	const handleSubmit = () => {
-		// navigate('/login');
-		console.log('clicked');
-	}
+	const handleGoogleSignIn = async () => {
+		try {
+			await googleSignIn();
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<nav>
 			<div>
-				<ul >
+				<ul>
 					<li>
-						<a href='#'>Home</a>
+						<button>Home</button>
 					</li>
 					<li>
-						<a href='#'>About</a>
+						<button>About</button>
 					</li>
 					<li>
-						<a href='#'>Contact</a>
+						<button>Contact</button>
 					</li>
 				</ul>
-				<button onSubmit={handleSubmit}>Sign In</button>
+				<button onClick={handleGoogleSignIn}>Sign In</button>
 			</div>
 		</nav>
 	);
